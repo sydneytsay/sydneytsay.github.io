@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sydney Tsay — Multidisciplinary Designer</title>
+  <meta name="description" content="Sydney Tsay is a multidisciplinary designer based in Los Angeles / Orange County working across UI/UX, brand, editorial design and event production.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body id="top">
+  <a class="skip" href="#work">Skip to work</a>
+
+  <!-- Pinned side labels: stay at mid-height on desktop, become a top bar on mobile -->
+  <nav class="side-nav" aria-label="Main">
+    <!-- EDIT: point this at your Instagram (or email) if you want, e.g. https://instagram.com/yourhandle -->
+    <a class="side side--left" href="#top">(@sydneytsay)</a>
+    <a class="side side--right" href="#work" data-toggle>(Work)</a>
+  </nav>
+
+  <!-- ============ INTRO (first screen) ============ -->
+  <header class="intro" aria-label="About">
+    <img class="photo" src="images/photo.jpg" alt="Portrait of Sydney Tsay" width="1200" height="900">
+
+    <!-- Offset text blocks. Each starts on a grid column: change --c (start column) and --s (columns spanned). -->
+    <p class="block block--intro" style="--c:2; --s:5">
+      I'm a multidisciplinary designer based in Los Angeles / Orange County with an expertise in design and production.
+    </p>
+
+    <p class="block block--edu-label" style="--c:4; --s:3">Education</p>
+
+    <p class="block block--edu" style="--c:3; --s:4">
+      UC San Diego<br>
+      B.S. in Cognitive Science<br>
+      Design &amp; Interaction
+    </p>
+  </header>
+
+  <!-- ============ WORK (one project per screen) ============
+       To swap a project:
+         1. Put your image in images/projects/ using the file name in src (or change src).
+            Until the file exists, a grey placeholder with the project name is shown.
+         2. Edit the two caption lines (title, then discipline).
+       To add a project, copy one <section class="project"> block. -->
+  <main id="work" aria-label="Selected work">
+
+    <section class="project">
+      <figure>
+        <div class="project__frame">
+          <img src="images/projects/commons-cafe.jpg" alt="Commons Cafe project" loading="lazy">
+        </div>
+        <figcaption>Commons Cafe<br>UI/UX + Graphic Design</figcaption>
+      </figure>
+    </section>
+
+    <section class="project">
+      <figure>
+        <div class="project__frame">
+          <img src="images/projects/out-the-archive.jpg" alt="Out the Archive project" loading="lazy">
+        </div>
+        <figcaption>Out the Archive<br>Brand + Marketing</figcaption>
+      </figure>
+    </section>
+
+    <section class="project">
+      <figure>
+        <div class="project__frame">
+          <img src="images/projects/trend-magazine.jpg" alt="TREND Magazine project" loading="lazy">
+        </div>
+        <figcaption>TREND Magazine<br>Editorial Design</figcaption>
+      </figure>
+    </section>
+
+    <section class="project">
+      <figure>
+        <div class="project__frame">
+          <img src="images/projects/mix-plus.jpg" alt="Mix+ project" loading="lazy">
+        </div>
+        <!-- EDIT: replace [N] with a real Mix+ outcome, or delete that line -->
+        <figcaption>Mix+<br>Event Production<br>[N] attendees</figcaption>
+      </figure>
+    </section>
+
+  </main>
+
+  <!-- 12-column grid overlay, toggled with the G key (for checking alignment) -->
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

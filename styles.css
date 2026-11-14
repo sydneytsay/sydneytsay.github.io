@@ -1,0 +1,190 @@
+/* =========================================================
+   Sydney Tsay — portfolio
+   One typeface (JetBrains Mono Light), one size, black & white.
+   Desktop: 12-column grid, 64px margins, 32px gutters (80px columns at 1440).
+   Mobile (<= 760px): 4-column grid, 20px margins, 16px gutters.
+   ========================================================= */
+
+:root {
+  --ink: #1a1a1a;        /* labels: 17.4:1 on white */
+  --mute: #5c5c5c;       /* body text: 6.7:1 on white (AA needs 4.5:1) */
+  --bg: #ffffff;
+  --ph: #e6e6e6;         /* image placeholder */
+
+  --cols: 12;
+  --m: 64px;             /* page margin */
+  --g: 32px;             /* gutter */
+  --edge: 16px;          /* side labels and photo sit 16px from the edges */
+
+  --size: 14px;          /* the only type size */
+  --lh: 24px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  background: var(--bg);
+  color: var(--mute);
+  font: 300 var(--size) / var(--lh) "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 4px; }
+a:focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; }
+img { display: block; max-width: 100%; }
+
+.skip {
+  position: absolute; left: var(--edge); top: -100px; z-index: 10;
+  background: var(--bg); color: var(--ink); padding: 0 8px; line-height: 44px;
+}
+.skip:focus { top: var(--edge); }
+
+/* ---------- Pinned side labels ---------- */
+.side {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  line-height: 44px;            /* 44px tall tap target */
+  font-weight: 500;
+  color: var(--ink);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.side--left  { left: var(--edge); }
+.side--right { right: var(--edge); }
+
+/* ---------- Grid helper ----------
+   Place an element on the grid with --c (start column, 1-based) and --s (span).
+   Column width = (container - 2 margins - 11 gutters) / 12            */
+.block {
+  --colw: calc((100% - 2 * var(--m) - (var(--cols) - 1) * var(--g)) / var(--cols));
+  position: absolute;
+  left:  calc(var(--m) + (var(--c) - 1) * (var(--colw) + var(--g)));
+  width: calc(var(--s) * var(--colw) + (var(--s) - 1) * var(--g));
+}
+
+/* ---------- Intro ---------- */
+.intro {
+  position: relative;
+  min-height: max(100vh, 720px);
+}
+.photo {
+  position: absolute;
+  top: var(--edge);
+  right: var(--edge);
+  width: 192px;
+  height: 240px;
+  object-fit: cover;
+  object-position: 50% 45%;
+  background: var(--ph);
+}
+.block--intro    { top: 256px; }
+.block--edu-label{ top: 512px; }
+.block--edu      { top: 560px; }
+
+/* ---------- Work: one project per screen ---------- */
+.project {
+  min-height: max(100vh, 640px);
+  display: flex;
+  justify-content: center;
+  padding-top: 96px;
+}
+.project figure {
+  /* columns 4-9 of the 12-column grid = 6 columns, centred.
+     Shrinks on short screens so image + caption still fit one screen. */
+  width: min(
+    calc(6 * (100vw - 2 * var(--m) - 11 * var(--g)) / 12 + 5 * var(--g)),
+    calc(100vh - 260px)
+  );
+  min-width: 320px;
+}
+.project__frame {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: var(--ph);
+  overflow: hidden;
+}
+.project__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;            /* change to "contain" to show the whole image */
+}
+/* Shown by script.js when the image file isn't there yet */
+.project__frame.is-missing img { display: none; }
+.project__frame.is-missing::after {
+  content: "[" attr(data-label) " image]";
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--mute);
+}
+.project figcaption {
+  margin-top: 16px;
+  text-align: center;
+}
+
+/* ---------- Grid overlay (press G) ---------- */
+.grid-overlay {
+  display: none;
+  position: fixed; inset: 0 var(--m);
+  grid-template-columns: repeat(var(--cols), 1fr);
+  column-gap: var(--g);
+  pointer-events: none;
+  z-index: 20;
+}
+.grid-overlay.on { display: grid; }
+.grid-overlay span { background: rgba(80, 140, 255, .10); border-inline: 1px solid rgba(80, 140, 255, .35); }
+
+/* =========================================================
+   Mobile: 4-column grid, 20px margins, 16px gutters.
+   Labels move to a fixed top bar so they never cover content.
+   Type goes to 16px (still a single size) for legibility.
+   ========================================================= */
+@media (max-width: 760px) {
+  :root {
+    --cols: 4;
+    --m: 20px;
+    --g: 16px;
+    --edge: 20px;
+    --size: 16px;
+    --lh: 24px;
+  }
+
+  .side-nav {
+    position: fixed; inset: 0 0 auto 0; height: 60px; z-index: 5;
+    background: var(--bg);
+  }
+  .side { top: 8px; transform: none; }
+
+  .intro {
+    min-height: auto;
+    padding: 76px var(--m) 64px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: var(--g);
+    row-gap: 32px;
+  }
+  .photo {
+    position: static;
+    grid-column: 3 / 5;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+  /* Blocks alternate between columns 1-3 and 2-4 so the asymmetry stays systematic */
+  .block { position: static; width: auto; }
+  .block--intro     { grid-column: 1 / 4; margin-top: 32px; }
+  .block--edu-label { grid-column: 2 / 5; margin-top: 32px; }
+  .block--edu       { grid-column: 1 / 4; margin-top: -16px; }
+
+  .project {
+    min-height: auto;
+    padding: 32px var(--m) 64px;
+  }
+  .project figure { width: 100%; min-width: 0; }
+}
