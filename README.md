@@ -15,7 +15,7 @@ Plain HTML, CSS and a little JavaScript. No build step. Open `index.html` in a b
    They show up automatically. Until a file exists, a grey "[Project image]" box is shown. Images are cropped to a square; to show the whole image, change `object-fit: cover` to `contain` in `styles.css`.
 2. **Project captions.** In `index.html`, edit the two lines inside each `<figcaption>` (name, then discipline).
 3. **Mix+ number.** Replace `[N] attendees` in the Mix+ caption, or delete that line.
-4. **(@sydneytsay) link.** It currently scrolls to the top. Change `href="#top"` to your Instagram or `mailto:` link if you want.
+4. **(@sydneytsay) link** goes to instagram.com/sydneytsay (opens in a new tab).
 5. Optional: a way to contact you (email, LinkedIn, resume) — the design doesn't have one yet.
 
 To add a project, copy one `<section class="project">…</section>` block.
